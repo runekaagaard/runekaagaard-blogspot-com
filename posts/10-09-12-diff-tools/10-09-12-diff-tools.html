@@ -1,0 +1,95 @@
+<p>This post is a stub.</p>
+
+<p>I've been doing experiments using different diff tools than the one implemented in&nbsp;<a href="http://www.phpunit.de/">PHPUnit</a>. I might talk about changing the default PHPUnit diff tool in a later post but this posts only lists the diff tools I've found and my thoughts about them.</p>
+
+<h2>Preparations</h2>
+
+<p>Here are some Ubuntu apt-get commands to install the mentioned tools:</p>
+
+<pre><code>sudo apt-get install diffuse
+sudo apt-get install vim
+sudo apt-get install wdiff
+sudo apt-get install python-pygments
+sudo apt-get install meld
+sudo apt-get install colordiff
+</code></pre>
+
+<h2>Diff</h2>
+
+<p>The classic diff tool generates nice noncolored text diffs:</p>
+
+<pre><code>rune@rune-laptop:~$ diff a b
+1c1,2
+&lt; Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+---
+&gt; Lorem dolor sit adipiscing elit. 
+&gt; 
+4c5
+&lt;      
+---
+&gt;     Nulla sed eros lacus.
+</code></pre>
+
+<p>Somehow my brain keeps struggling understanding this format. But it get gets
+immediately better when using the unified format which my brain likes a lot
+better:</p>
+
+<pre><code>rune@rune-laptop:~$ diff -u a b
+--- a   2010-09-12 14:59:06.524750583 +0200
++++ b   2010-09-12 14:59:06.524750583 +0200
+@@ -1,7 +1,8 @@
+-Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
++Lorem dolor sit adipiscing elit. 
++
+     Donec eget viverra lacus. 
+     Nam vitae ante nunc.
+-     
++    Nulla sed eros lacus.     
+ Maecenas elementum.
+ suscipit urna.
+</code></pre>
+
+<h2>Colordiff</h2>
+
+<p>Colordiff is a wrapper around diff which adds color. This makes the diff
+understandable at the first glance.</p>
+
+<p><img src="http://i.imgur.com/KURvX.png" alt="colordiff" title="" /></p>
+
+<h2>Pygmentize</h2>
+
+<p>Pygmentize's diff formatter creates very similar output as Colordiff.</p>
+
+<p><img src="http://i.imgur.com/rqRzM.png" alt="pygmentize" title="" /></p>
+
+<h2>Wdiff</h2>
+
+<p>One thing missing from both diff, colordiff and pygmentize is the ability to
+show changes inside the lines. This lead me to try wdiff, but it does not 
+handle line changes very well.</p>
+
+<p><img src="http://i.imgur.com/T4wFV.png" alt="wdiff-colordiff" title="" /></p>
+
+<h2>Meld</h2>
+
+<p>The failure of wdiff let me to try gui tools, one of them meld which creates
+a very nice view. Handles inline changes.</p>
+
+<p><img src="http://i.imgur.com/ZXaWx.png" alt="meld" title="" /></p>
+
+<h2>Diffuse</h2>
+
+<p>Python tool that also looks very nice. Handles inline changes.</p>
+
+<p><img src="http://i.imgur.com/CNSzz.png" alt="diffuse" title="" /></p>
+
+<h2>Vimdiff</h2>
+
+<p>Part of vim and also looks very nice. Handles inline changes.</p>
+
+<p><img src="http://i.imgur.com/nhfg9.png" alt="vimdiff" title="" /></p>
+
+<h2>Summary</h2>
+
+<p>I guess my favorites are colordiff/pygmentize or meld. But I will keep looking
+for a command line diff tool that handles inline changes.</p>
